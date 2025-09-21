@@ -125,7 +125,7 @@ export const HeroSection = () => {
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16 animate-slide-in-up" style={{animationDelay: '0.8s'}}>
             {[
-              { number: "15+", label: "Networks Deployed", icon: Globe },
+              { number: "50+", label: "Networks Deployed", icon: Globe },
               { number: "99.9%", label: "Uptime Guarantee", icon: Star },
               { number: "24/7", label: "Mission Support", icon: Rocket }
             ].map((stat, index) => (
