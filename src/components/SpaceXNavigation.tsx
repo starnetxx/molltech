@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Rocket, Wifi, Shield, Smartphone, Camera, ShoppingCart } from 'lucide-react';
+import { Menu, X, Rocket, Wifi, Shield, Smartphone, Camera, ShoppingCart, HelpCircle } from 'lucide-react';
 
 export const SpaceXNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ export const SpaceXNavigation = () => {
     { name: 'Gallery', href: '#gallery', icon: Camera },
     { name: 'Shop', href: '#shop', icon: ShoppingCart },
     { name: 'Packages', href: '#packages', icon: Shield },
-    { name: 'Solutions', href: '#solutions', icon: Smartphone },
+    { name: 'FAQ', href: '#faq', icon: HelpCircle },
     { name: 'Contact', href: '#contact', icon: Rocket },
   ];
 
@@ -32,9 +32,19 @@ export const SpaceXNavigation = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center animate-pulse-glow">
-                <Rocket className="h-6 w-6 text-white" />
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Traceroot Technology Solutions Logo" 
+                className="w-10 h-10 rounded-lg object-contain animate-pulse-glow"
+                onError={(e) => {
+                  // Fallback to rocket icon if logo fails to load
+                  e.currentTarget.style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = 'w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center animate-pulse-glow';
+                  fallback.innerHTML = '<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>';
+                  e.currentTarget.parentNode?.appendChild(fallback);
+                }}
+              />
             </div>
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold text-white text-heading">

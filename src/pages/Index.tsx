@@ -2,6 +2,7 @@ import { SpaceXNavigation } from "@/components/SpaceXNavigation";
 import { HeroSection } from "@/components/HeroSection";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { DeviceShop } from "@/components/DeviceShop";
+import { FAQ } from "@/components/FAQ";
 import { BackToTop } from "@/components/BackToTop";
 import { PricingPackageCard } from "@/components/PricingPackageCard";
 import { ProfessionalButton } from "@/components/ui/professional-button";
@@ -275,6 +276,9 @@ const Index = () => {
           </div>
         </section>
         
+        {/* FAQ Section */}
+        <FAQ />
+        
         {/* CTA Section */}
         <section id="contact" className="py-24 relative">
           <div className="container mx-auto px-6 text-center">
@@ -318,9 +322,19 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                    <Rocket className="h-6 w-6 text-white" />
-                  </div>
+                  <img 
+                    src="/logo.png" 
+                    alt="Traceroot Technology Solutions Logo" 
+                    className="w-10 h-10 rounded-lg object-contain"
+                    onError={(e) => {
+                      // Fallback to gradient background if logo fails
+                      e.currentTarget.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.className = 'w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center';
+                      fallback.innerHTML = '<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>';
+                      e.currentTarget.parentNode?.appendChild(fallback);
+                    }}
+                  />
                   <div>
                     <h3 className="text-xl font-bold text-white text-heading">TRACEROOT</h3>
                     <p className="text-xs text-blue-300 text-mono">TECHNOLOGY SOLUTIONS</p>
