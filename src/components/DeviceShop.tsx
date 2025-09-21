@@ -84,11 +84,30 @@ export const DeviceShop = () => {
       ],
       specs: [
         'Download: 500+ Mbps',
-        'Upload: 20-40 Mbps',
+        'Upload: 50-80 Mbps',
         'Priority data allocation',
         '24/7 customer support'
       ],
       image: '/high_performance.jpg'
+    },
+    {
+      id: 'starlink-mini',
+      name: 'Starlink Mini',
+      category: 'starlink',
+      description: 'Compact and portable satellite internet for mobile use',
+      features: [
+        'Ultra-portable design',
+        'Battery powered option',
+        'Quick setup anywhere',
+        'Perfect for travel'
+      ],
+      specs: [
+        'Download: 50-100 Mbps',
+        'Upload: 5-15 Mbps',
+        'Power consumption: 20-40W',
+        'Weight: 2.5kg'
+      ],
+      image: '/placeholder.svg'
     },
 
     // Mikrotik Routers
