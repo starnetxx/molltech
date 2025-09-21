@@ -44,11 +44,13 @@
 
     --radius: 0.75rem;
 
-    /* Professional Gradients */
+    /* Apple Glass Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(220 70% 30%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(220 25% 96%) 100%);
     --gradient-hero: linear-gradient(135deg, hsl(220 70% 25%) 0%, hsl(220 60% 35%) 50%, hsl(220 50% 45%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(220 25% 98%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9) 0%, hsl(220 25% 98% / 0.8) 100%);
+    --gradient-glass: linear-gradient(135deg, hsl(0 0% 100% / 0.25) 0%, hsl(0 0% 100% / 0.05) 100%);
+    --gradient-glass-dark: linear-gradient(135deg, hsl(0 0% 0% / 0.15) 0%, hsl(0 0% 0% / 0.05) 100%);
 
     /* Stripe Patterns */
     --stripe-pattern: repeating-linear-gradient(
@@ -66,10 +68,12 @@
       transparent 8px
     );
 
-    /* Professional Shadows */
+    /* Apple Glass Shadows */
     --shadow-card: 0 4px 20px hsl(220 70% 25% / 0.08);
     --shadow-card-hover: 0 8px 40px hsl(220 70% 25% / 0.15);
     --shadow-hero: 0 20px 60px hsl(220 70% 25% / 0.2);
+    --shadow-glass: 0 8px 32px hsl(0 0% 0% / 0.1);
+    --shadow-glass-hover: 0 16px 48px hsl(0 0% 0% / 0.15);
 
     /* Typography Scale */
     --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -181,6 +185,14 @@
     box-shadow: var(--shadow-hero);
   }
 
+  .shadow-glass {
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .shadow-glass-hover {
+    box-shadow: var(--shadow-glass-hover);
+  }
+
   /* Professional Animation Classes */
   .transition-smooth {
     transition: var(--transition-smooth);
@@ -211,8 +223,38 @@
     @apply transition-smooth hover:scale-105;
   }
 
-  /* Professional Card Styles */
+  /* Apple Glass Card Styles */
   .card-professional {
     @apply bg-gradient-card shadow-card hover:shadow-card-hover transition-smooth;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl border border-white/20 bg-white/10 shadow-glass hover:shadow-glass-hover transition-all duration-300;
+  }
+
+  .glass-morphism {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .mobile-glass {
+    @apply rounded-3xl glass-morphism p-6 shadow-glass;
+  }
+
+  /* Mobile responsive improvements */
+  @media (max-width: 768px) {
+    .mobile-padding {
+      @apply px-4 py-6;
+    }
+    
+    .mobile-text {
+      @apply text-sm;
+    }
+    
+    .mobile-title {
+      @apply text-2xl;
+    }
   }
 }

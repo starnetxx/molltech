@@ -102,107 +102,118 @@ const pricingPackages = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <CompanyHeader />
-      <HeroSection />
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative">
+      <div className="absolute inset-0 bg-black/10"></div>
       
-      {/* Main Pricing Section */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-transparent"></div>
+      <div className="relative">
+        <CompanyHeader />
+        <HeroSection />
         
-        <div className="relative container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Choose Your Perfect Package
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From basic router setup to complete mobile app solutions. Each package builds upon the previous one with additional features and extended support.
+        {/* Main Pricing Section */}
+        <section className="py-16 relative">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-heading text-3xl lg:text-4xl font-bold text-white mb-4">
+                Choose Your Perfect Package
+              </h2>
+              <p className="text-lg text-white/80 max-w-2xl mx-auto">
+                From basic router setup to complete mobile app solutions. Each package builds upon the previous one with additional features and extended support.
+              </p>
+            </div>
+            
+            {/* Pricing Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8">
+              {pricingPackages.map((pkg) => (
+                <div key={pkg.id} className="hover:shadow-glass-hover transition-all duration-300">
+                  <PricingPackageCard package={pkg} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        <Separator className="my-8 border-white/20" />
+        
+        {/* Additional Information Section */}
+        <section className="py-12 relative">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <div className="mobile-glass space-y-4">
+                <div className="p-4 bg-blue-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
+                  <Award className="h-8 w-8 text-blue-300" />
+                </div>
+                <h3 className="text-heading text-xl font-semibold text-white">Professional Service</h3>
+                <p className="text-white/80">
+                  Certified network engineers with years of Mikrotik experience
+                </p>
+              </div>
+              
+              <div className="mobile-glass space-y-4">
+                <div className="p-4 bg-purple-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
+                  <Clock className="h-8 w-8 text-purple-300" />
+                </div>
+                <h3 className="text-heading text-xl font-semibold text-white">Quick Deployment</h3>
+                <p className="text-white/80">
+                  Fast turnaround times with comprehensive documentation
+                </p>
+              </div>
+              
+              <div className="mobile-glass space-y-4">
+                <div className="p-4 bg-green-500/20 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
+                  <MapPin className="h-8 w-8 text-green-300" />
+                </div>
+                <h3 className="text-heading text-xl font-semibold text-white">Nigeria-Wide</h3>
+                <p className="text-white/80">
+                  Remote configuration and on-site support across Nigeria
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* CTA Section */}
+        <section className="py-16 relative">
+          <div className="container mx-auto px-4 md:px-6 text-center">
+            <div className="max-w-3xl mx-auto mobile-glass space-y-6">
+              <h2 className="text-heading text-3xl lg:text-4xl font-bold text-white">
+                Ready to Transform Your Network?
+              </h2>
+              <p className="text-lg text-white/80">
+                Contact our team today for a free consultation and let us help you choose the perfect package for your business needs.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+                <ProfessionalButton 
+                  variant="premium" 
+                  size="xl"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold"
+                >
+                  Get Free Consultation
+                </ProfessionalButton>
+                <ProfessionalButton 
+                  variant="professional" 
+                  size="xl"
+                  className="glass-morphism border-white/20 text-white hover:bg-white/20"
+                  onClick={() => window.location.href = 'tel:09063412927'}
+                >
+                  Call: 09063412927
+                </ProfessionalButton>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Footer */}
+        <footer className="py-8 bg-black/30 backdrop-blur-lg border-t border-white/10">
+          <div className="container mx-auto px-4 md:px-6 text-center">
+            <p className="text-sm text-white/80">
+              © 2024 Traceroot Technology Solutions (RC – 3260785). All rights reserved.
+              <br className="sm:hidden" />
+              <span className="sm:ml-4">Professional Network Configuration Services</span>
             </p>
           </div>
-          
-          {/* Pricing Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {pricingPackages.map((pkg) => (
-              <PricingPackageCard key={pkg.id} package={pkg} />
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      <Separator className="my-8" />
-      
-      {/* Additional Information Section */}
-      <section className="py-12 bg-stripe-pattern">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-4">
-              <div className="p-4 bg-primary/10 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <Award className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-heading text-xl font-semibold">Professional Service</h3>
-              <p className="text-muted-foreground">
-                Certified network engineers with years of Mikrotik experience
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="p-4 bg-primary/10 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <Clock className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-heading text-xl font-semibold">Quick Deployment</h3>
-              <p className="text-muted-foreground">
-                Fast turnaround times with comprehensive documentation
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <div className="p-4 bg-primary/10 rounded-full w-16 h-16 mx-auto flex items-center justify-center">
-                <MapPin className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-heading text-xl font-semibold">Nigeria-Wide</h3>
-              <p className="text-muted-foreground">
-                Remote configuration and on-site support across Nigeria
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-hero text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-stripe-pattern opacity-10"></div>
-        
-        <div className="relative container mx-auto px-6 text-center">
-          <div className="max-w-3xl mx-auto space-y-6">
-            <h2 className="text-heading text-3xl lg:text-4xl font-bold">
-              Ready to Transform Your Network?
-            </h2>
-            <p className="text-lg opacity-90">
-              Contact our team today for a free consultation and let us help you choose the perfect package for your business needs.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-              <ProfessionalButton variant="premium" size="xl">
-                Get Free Consultation
-              </ProfessionalButton>
-              <ProfessionalButton variant="professional" size="xl">
-                Call: 09063412927
-              </ProfessionalButton>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Footer */}
-      <footer className="py-8 bg-foreground text-background">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm">
-            © 2024 Traceroot Technology Solutions (RC – 3260785). All rights reserved.
-            <br className="sm:hidden" />
-            <span className="sm:ml-4">Professional Network Configuration Services</span>
-          </p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };
