@@ -107,7 +107,7 @@ export const DeviceShop = () => {
         'Power consumption: 20-40W',
         'Weight: 2.5kg'
       ],
-      image: '/placeholder.svg'
+      image: '/starlink mini.jpg'
     },
 
     // Mikrotik Routers
