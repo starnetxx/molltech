@@ -12,7 +12,8 @@ import {
   Mail,
   X,
   ShoppingCart,
-  Star
+  Star,
+  ArrowRight
 } from 'lucide-react';
 
 interface Device {
@@ -28,6 +29,7 @@ interface Device {
 
 export const DeviceShop = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [showAllProducts, setShowAllProducts] = useState(false);
   const [quoteDevice, setQuoteDevice] = useState<Device | null>(null);
   const [quoteForm, setQuoteForm] = useState({
     name: '',
@@ -51,7 +53,7 @@ export const DeviceShop = () => {
     // Starlink Devices
     {
       id: 'starlink-standard',
-      name: 'Starlink Standard Kit',
+      name: 'Starlink V4 Standard Kit',
       category: 'starlink',
       description: 'High-speed, low-latency internet for residential and business use',
       features: [
@@ -66,7 +68,7 @@ export const DeviceShop = () => {
         'Temperature range: -30°C to +50°C',
         'Dimensions: 59.5cm x 38.5cm'
       ],
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
       popular: true
     },
     {
@@ -107,7 +109,7 @@ export const DeviceShop = () => {
         '256MB RAM',
         'RouterOS Level 4 license'
       ],
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
       popular: true
     },
     {
@@ -186,7 +188,7 @@ export const DeviceShop = () => {
         'PoE 802.3af',
         'Integrated antennas'
       ],
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
       popular: true
     },
 
@@ -307,7 +309,7 @@ export const DeviceShop = () => {
         'Battery: 300Ah LiFePO4',
         'Runtime: 3-5 days'
       ],
-      image: '/placeholder.svg',
+      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
       popular: true
     }
   ];
@@ -315,6 +317,9 @@ export const DeviceShop = () => {
   const filteredDevices = selectedCategory === 'all' 
     ? devices 
     : devices.filter(device => device.category === selectedCategory);
+
+  // Show only first 4 devices initially, or all if showAllProducts is true
+  const displayedDevices = showAllProducts ? filteredDevices : filteredDevices.slice(0, 4);
 
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -367,7 +372,7 @@ export const DeviceShop = () => {
 
         {/* Device Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {filteredDevices.map((device, index) => (
+          {displayedDevices.map((device, index) => (
             <div
               key={device.id}
               className="spacex-card group hover-lift animate-slide-in-up relative overflow-hidden"
@@ -450,6 +455,22 @@ export const DeviceShop = () => {
             </div>
           ))}
         </div>
+
+        {/* View All Products Button */}
+        {!showAllProducts && filteredDevices.length > 4 && (
+          <div className="text-center mt-12 animate-slide-in-up" style={{animationDelay: '0.5s'}}>
+            <button
+              onClick={() => setShowAllProducts(true)}
+              className="spacex-button-primary bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-lg px-12 py-6 hover-lift"
+            >
+              <span className="flex items-center space-x-3">
+                <ShoppingCart className="h-6 w-6" />
+                <span className="font-bold">VIEW ALL PRODUCTS</span>
+                <ArrowRight className="h-6 w-6" />
+              </span>
+            </button>
+          </div>
+        )}
 
         {/* Call to Action */}
         <div className="text-center mt-16 animate-slide-in-up" style={{animationDelay: '1s'}}>
