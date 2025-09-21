@@ -1,10 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shield, Wifi, Settings, Smartphone, Rocket, Zap, Globe, Star } from "lucide-react";
 
 export const HeroSection = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = Array.from({ length: 11 }, (_, i) => `/p${i + 1}.jpg`);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 1000); // Change image every 1 second
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
   return (
     <section className="spacex-hero flex items-center justify-center relative overflow-hidden pt-28">
-      <div className="absolute inset-0 bg-gradient-mesh opacity-50"></div>
+      {/* Background Slideshow */}
+      <div className="absolute inset-0">
+        {images.map((image, index) => (
+          <div
+            key={image}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImage ? 'opacity-30' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={image}
+              alt={`Project ${index + 1}`}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
+      
+      <div className="absolute inset-0 bg-gradient-mesh opacity-30"></div>
       
       {/* Floating Elements */}
       <div className="absolute top-20 left-10 w-2 h-2 bg-blue-400 rounded-full animate-float opacity-60"></div>

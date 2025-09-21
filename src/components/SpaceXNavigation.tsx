@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Rocket, Wifi, Shield, Smartphone, ChevronDown } from 'lucide-react';
+import { Menu, X, Rocket, Wifi, Shield, Smartphone, Camera } from 'lucide-react';
 
 export const SpaceXNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +16,7 @@ export const SpaceXNavigation = () => {
 
   const navItems = [
     { name: 'Services', href: '#services', icon: Wifi },
+    { name: 'Gallery', href: '#gallery', icon: Camera },
     { name: 'Packages', href: '#packages', icon: Shield },
     { name: 'Solutions', href: '#solutions', icon: Smartphone },
     { name: 'Contact', href: '#contact', icon: Rocket },
