@@ -1,6 +1,7 @@
 import { SpaceXNavigation } from "@/components/SpaceXNavigation";
 import { HeroSection } from "@/components/HeroSection";
 import { ProjectGallery } from "@/components/ProjectGallery";
+import { DeviceShop } from "@/components/DeviceShop";
 import { PricingPackageCard } from "@/components/PricingPackageCard";
 import { ProfessionalButton } from "@/components/ui/professional-button";
 import { Separator } from "@/components/ui/separator";
@@ -183,6 +184,9 @@ const Index = () => {
         
         {/* Project Gallery Section */}
         <ProjectGallery />
+        
+        {/* Device Shop Section */}
+        <DeviceShop />
         
         {/* Main Pricing Section */}
         <section id="packages" className="py-24 relative">
