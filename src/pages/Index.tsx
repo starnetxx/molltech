@@ -366,7 +366,7 @@ const Index = () => {
             
             <div className="border-t border-white/10 pt-8 text-center">
               <p className="text-sm text-white/60">
-                © 2024 Traceroot Technology Solutions. All systems operational.
+                © {new Date().getFullYear()} Traceroot Technology Solutions. All systems operational.
                 <br className="sm:hidden" />
                 <span className="sm:ml-4">Next-generation network infrastructure.</span>
               </p>

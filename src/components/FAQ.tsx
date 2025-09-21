@@ -57,7 +57,7 @@ export const FAQ = () => {
     {
       id: 'payment-terms',
       question: 'What are your payment terms and methods?',
-      answer: 'We accept bank transfers, mobile money payments, and installment plans for larger projects. Typically, we require 50% upfront for equipment purchases and 30% for configuration services, with the balance due upon completion. Contact us for flexible payment arrangements.'
+      answer: 'We accept bank transfers, mobile money payments, and installment plans for larger projects. For equipment purchases, we require 100% payment upfront. For configuration services, we require 70% upfront with the balance due upon completion. Contact us for flexible payment arrangements.'
     },
     {
       id: 'warranty-guarantee',
