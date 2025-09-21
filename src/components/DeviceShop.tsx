@@ -64,7 +64,7 @@ export const DeviceShop = () => {
       ],
       specs: [
         'Coverage: Global',
-        'Power consumption: 50-75W',
+        'Power consumption: 100-150W',
         'Temperature range: -30°C to +50°C',
         'Dimensions: 59.5cm x 38.5cm'
       ],
@@ -83,7 +83,7 @@ export const DeviceShop = () => {
         'Service Level Agreement'
       ],
       specs: [
-        'Download: 150-500 Mbps',
+        'Download: 500+ Mbps',
         'Upload: 20-40 Mbps',
         'Priority data allocation',
         '24/7 customer support'
