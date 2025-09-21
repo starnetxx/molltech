@@ -68,12 +68,12 @@ export const DeviceShop = () => {
         'Temperature range: -30°C to +50°C',
         'Dimensions: 59.5cm x 38.5cm'
       ],
-      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
+      image: '/v4.jpg',
       popular: true
     },
     {
       id: 'starlink-business',
-      name: 'Starlink Business',
+      name: 'Starlink Business High Performance Kit',
       category: 'starlink',
       description: 'Enterprise-grade satellite internet with priority support',
       features: [
@@ -88,7 +88,7 @@ export const DeviceShop = () => {
         'Priority data allocation',
         '24/7 customer support'
       ],
-      image: '/placeholder.svg'
+      image: '/high_performance.jpg'
     },
 
     // Mikrotik Routers
@@ -109,27 +109,27 @@ export const DeviceShop = () => {
         '256MB RAM',
         'RouterOS Level 4 license'
       ],
-      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
+      image: '/ax2.jpg',
       popular: true
     },
     {
-      id: 'mikrotik-ccr2004',
-      name: 'MikroTik CCR2004-1G-12S+2XS',
+      id: 'mikrotik-hap-ax3',
+      name: 'MikroTik hAP ax³',
       category: 'routers',
-      description: 'High-performance enterprise router for demanding networks',
+      description: 'Advanced tri-band Wi-Fi 6 router with superior performance',
       features: [
-        'ARM64 quad-core CPU',
-        'High-speed SFP+ ports',
-        'Enterprise-grade performance',
-        'Advanced routing protocols'
+        'Wi-Fi 6 tri-band technology',
+        'Dual 5GHz + 2.4GHz bands',
+        'High-gain external antennas',
+        'Advanced QoS features'
       ],
       specs: [
-        '12x SFP+ (10Gbps)',
-        '2x 25Gbps SFP28',
-        '1x Gigabit Ethernet',
-        '4GB RAM, 128MB storage'
+        '5x Gigabit Ethernet ports',
+        'USB 3.0 port',
+        '1GB RAM',
+        'RouterOS Level 4 license'
       ],
-      image: '/placeholder.svg'
+      image: '/ax3.jpg'
     },
     {
       id: 'mikrotik-rb5009',
