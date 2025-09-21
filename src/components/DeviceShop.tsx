@@ -102,8 +102,8 @@ export const DeviceShop = () => {
         'Perfect for travel'
       ],
       specs: [
-        'Download: 50-100 Mbps',
-        'Upload: 5-15 Mbps',
+        'Download: 80-150 Mbps',
+        'Upload: 20-30 Mbps',
         'Power consumption: 20-40W',
         'Weight: 2.5kg'
       ],
