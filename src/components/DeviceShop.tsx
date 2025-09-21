@@ -191,6 +191,121 @@ export const DeviceShop = () => {
       image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
       popular: true
     },
+    {
+      id: 'cudy-ax1800',
+      name: 'Cudy AX1800 Wi-Fi 6 Access Point',
+      category: 'access-points',
+      description: 'Affordable Wi-Fi 6 access point for small to medium businesses',
+      features: [
+        'Wi-Fi 6 dual-band',
+        'MU-MIMO technology',
+        'Easy mesh setup',
+        'PoE+ support'
+      ],
+      specs: [
+        'AX1800 speeds',
+        '1x Gigabit Ethernet',
+        'PoE+ powered',
+        'Wall/ceiling mount'
+      ],
+      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=400&fit=crop&crop=center',
+    },
+    {
+      id: 'ruijie-rg-ap820',
+      name: 'Ruijie RG-AP820-L Wi-Fi 6 AP',
+      category: 'access-points',
+      description: 'Enterprise-grade access point with cloud management',
+      features: [
+        'Wi-Fi 6 technology',
+        'Cloud management',
+        'High-density support',
+        'Advanced security'
+      ],
+      specs: [
+        'AX3000 speeds',
+        '2.5G Ethernet port',
+        'PoE+ powered',
+        'Indoor/outdoor rated'
+      ],
+      image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=400&h=400&fit=crop&crop=center',
+    },
+    {
+      id: 'wavlink-ax1800',
+      name: 'Wavlink AX1800 Ceiling AP',
+      category: 'access-points',
+      description: 'Ceiling-mounted access point with seamless roaming',
+      features: [
+        'Wi-Fi 6 dual-band',
+        'Seamless roaming',
+        'Centralized management',
+        'Easy installation'
+      ],
+      specs: [
+        'AX1800 speeds',
+        '1x Gigabit Ethernet',
+        'PoE powered',
+        'Ceiling mount design'
+      ],
+      image: 'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=400&h=400&fit=crop&crop=center',
+    },
+    {
+      id: 'tenda-w15e',
+      name: 'Tenda W15E Wi-Fi 6 Access Point',
+      category: 'access-points',
+      description: 'Cost-effective Wi-Fi 6 solution for business networks',
+      features: [
+        'Wi-Fi 6 technology',
+        'Dual-band operation',
+        'Mesh networking',
+        'Easy configuration'
+      ],
+      specs: [
+        'AX1500 speeds',
+        '1x Gigabit Ethernet',
+        'PoE powered',
+        'Wall/ceiling mount'
+      ],
+      image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=400&fit=crop&crop=center',
+    },
+    {
+      id: 'tplink-eap670',
+      name: 'TP-Link EAP670 Wi-Fi 6 AP',
+      category: 'access-points',
+      description: 'Professional Wi-Fi 6 access point with Omada SDN',
+      features: [
+        'Wi-Fi 6 technology',
+        'Omada SDN platform',
+        'High-performance antennas',
+        'Band steering'
+      ],
+      specs: [
+        'AX5400 speeds',
+        '2.5G + 1G Ethernet',
+        'PoE+ powered',
+        'Ceiling mount'
+      ],
+      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center',
+      popular: true
+    },
+    {
+      id: 'grandstream-gwn7664',
+      name: 'Grandstream GWN7664 Wi-Fi 6 AP',
+      category: 'access-points',
+      description: 'Enterprise Wi-Fi 6 access point with advanced security',
+      features: [
+        'Wi-Fi 6 tri-band',
+        'Enterprise security',
+        'GWN.Cloud management',
+        'High-density support'
+      ],
+      specs: [
+        'AX6000 speeds',
+        '2.5G + 1G Ethernet',
+        'PoE++ powered',
+        'Indoor/outdoor rated'
+      ],
+      image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=400&fit=crop&crop=center',
+    },
 
     // Point-to-Point
     {
