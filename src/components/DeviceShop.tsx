@@ -90,25 +90,6 @@ export const DeviceShop = () => {
       ],
       image: '/high_performance.jpg'
     },
-    {
-      id: 'starlink-mini',
-      name: 'Starlink Mini',
-      category: 'starlink',
-      description: 'Compact and portable satellite internet for mobile use',
-      features: [
-        'Ultra-portable design',
-        'Battery powered option',
-        'Quick setup anywhere',
-        'Perfect for travel'
-      ],
-      specs: [
-        'Download: 80-150 Mbps',
-        'Upload: 20-30 Mbps',
-        'Power consumption: 20-40W',
-        'Weight: 2.5kg'
-      ],
-      image: '/starlink mini.jpg'
-    },
 
     // Mikrotik Routers
     {
@@ -149,6 +130,25 @@ export const DeviceShop = () => {
       ],
       image: '/ax3.jpg',
       popular: true
+    },
+    {
+      id: 'starlink-mini',
+      name: 'Starlink Mini',
+      category: 'starlink',
+      description: 'Compact and portable satellite internet for mobile use',
+      features: [
+        'Ultra-portable design',
+        'Battery powered option',
+        'Quick setup anywhere',
+        'Perfect for travel'
+      ],
+      specs: [
+        'Download: 80-150 Mbps',
+        'Upload: 20-30 Mbps',
+        'Power consumption: 20-40W',
+        'Weight: 2.5kg'
+      ],
+      image: '/mini.jpg'
     },
     {
       id: 'mikrotik-rb5009',
