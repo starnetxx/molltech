@@ -188,7 +188,7 @@ export const DeviceShop = () => {
         'PoE 802.3af',
         'Integrated antennas'
       ],
-      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
       popular: true
     },
     {
@@ -208,7 +208,7 @@ export const DeviceShop = () => {
         'PoE+ powered',
         'Wall/ceiling mount'
       ],
-      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
     },
     {
       id: 'ruijie-rg-ap820',
@@ -227,7 +227,7 @@ export const DeviceShop = () => {
         'PoE+ powered',
         'Indoor/outdoor rated'
       ],
-      image: 'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
     },
     {
       id: 'wavlink-ax1800',
@@ -246,7 +246,7 @@ export const DeviceShop = () => {
         'PoE powered',
         'Ceiling mount design'
       ],
-      image: 'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
     },
     {
       id: 'tenda-w15e',
@@ -265,7 +265,7 @@ export const DeviceShop = () => {
         'PoE powered',
         'Wall/ceiling mount'
       ],
-      image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
     },
     {
       id: 'tplink-eap670',
@@ -284,7 +284,7 @@ export const DeviceShop = () => {
         'PoE+ powered',
         'Ceiling mount'
       ],
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
       popular: true
     },
     {
@@ -304,7 +304,7 @@ export const DeviceShop = () => {
         'PoE++ powered',
         'Indoor/outdoor rated'
       ],
-      image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
     },
 
     // Point-to-Point
@@ -424,7 +424,7 @@ export const DeviceShop = () => {
         'Battery: 300Ah LiFePO4',
         'Runtime: 3-5 days'
       ],
-      image: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=400&h=400&fit=crop&crop=center',
+      image: '/placeholder.svg',
       popular: true
     }
   ];
