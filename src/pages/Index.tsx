@@ -2,6 +2,7 @@ import { SpaceXNavigation } from "@/components/SpaceXNavigation";
 import { HeroSection } from "@/components/HeroSection";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { DeviceShop } from "@/components/DeviceShop";
+import { BackToTop } from "@/components/BackToTop";
 import { PricingPackageCard } from "@/components/PricingPackageCard";
 import { ProfessionalButton } from "@/components/ui/professional-button";
 import { Separator } from "@/components/ui/separator";
@@ -359,6 +360,9 @@ const Index = () => {
           </div>
         </footer>
       </div>
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </div>
   );
 };

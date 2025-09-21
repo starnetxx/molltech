@@ -85,10 +85,13 @@ export const HeroSection = () => {
               
               <button 
                 className="spacex-button-secondary text-lg px-10 py-5 hover-lift"
-                onClick={() => window.location.href = 'tel:09063412927'}
+                onClick={() => {
+                  const element = document.getElementById('shop');
+                  element?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 <Globe className="h-5 w-5 mr-2" />
-                Mission Control
+                Shop
               </button>
             </div>
           </div>
