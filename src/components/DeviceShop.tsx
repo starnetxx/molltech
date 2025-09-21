@@ -57,7 +57,7 @@ export const DeviceShop = () => {
       category: 'starlink',
       description: 'High-speed, low-latency internet for residential and business use',
       features: [
-        'Download speeds: 50-200 Mbps',
+        'Download speeds: 200-500 Mbps',
         'Low latency: 25-35ms',
         'Weather resistant',
         'Easy self-installation'
