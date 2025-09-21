@@ -8,7 +8,7 @@ export const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 1000); // Change image every 1 second
+    }, 2000); // Change image every 2 seconds
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -21,7 +21,7 @@ export const HeroSection = () => {
           <div
             key={image}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentImage ? 'opacity-30' : 'opacity-0'
+              index === currentImage ? 'opacity-70' : 'opacity-0'
             }`}
           >
             <img
@@ -34,7 +34,7 @@ export const HeroSection = () => {
             />
           </div>
         ))}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
       
       <div className="absolute inset-0 bg-gradient-mesh opacity-30"></div>
