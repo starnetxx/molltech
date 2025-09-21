@@ -109,8 +109,7 @@ export const DeviceShop = () => {
         '256MB RAM',
         'RouterOS Level 4 license'
       ],
-      image: '/ax2.jpg',
-      popular: true
+      image: '/ax2.jpg'
     },
     {
       id: 'mikrotik-hap-ax3',
@@ -129,7 +128,8 @@ export const DeviceShop = () => {
         '1GB RAM',
         'RouterOS Level 4 license'
       ],
-      image: '/ax3.jpg'
+      image: '/ax3.jpg',
+      popular: true
     },
     {
       id: 'mikrotik-rb5009',
