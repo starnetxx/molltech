@@ -9,6 +9,7 @@ import PackageBasic from "./pages/PackageBasic";
 import PackageStandard from "./pages/PackageStandard";
 import PackageAdvanced from "./pages/PackageAdvanced";
 import PackagePremium from "./pages/PackagePremium";
+import Billing from "./pages/Billing";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/package/standard" element={<PackageStandard />} />
           <Route path="/package/advanced" element={<PackageAdvanced />} />
           <Route path="/package/premium" element={<PackagePremium />} />
+          <Route path="/billing" element={<Billing />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
