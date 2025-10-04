@@ -297,12 +297,12 @@ export const generatePreviewHTML = (document: Document): string => {
         .logo-container {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
+          justify-content: space-between;
           margin-bottom: 15px;
           gap: 15px;
         }
         .logo-container img {
-          height: 50px;
+          height: 60px;
           width: auto;
           flex-shrink: 0;
         }
@@ -311,6 +311,7 @@ export const generatePreviewHTML = (document: Document): string => {
           font-weight: 600;
           color: white;
           margin: 0;
+          margin-left: auto;
         }
       </style>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

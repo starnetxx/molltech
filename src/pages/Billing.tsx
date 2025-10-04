@@ -34,7 +34,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
-import { generateImage, generatePreviewHTML, generatePrintView } from '../utils/pdfGenerator';
+import { generateImage, generatePreviewHTML } from '../utils/pdfGenerator';
 import { formatNaira, formatNumber } from '../utils/currency';
 
 // Types
@@ -431,10 +431,6 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
     }
   };
 
-  // Print/Save as PDF
-  const printDocument = (document: Document) => {
-    generatePrintView(document);
-  };
 
   // Preview document
   const previewDocument = (document: Document) => {
@@ -883,14 +879,6 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                           >
                             <Download className="h-4 w-4 mr-2" />
                             Image
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => printDocument(doc)}
-                          >
-                            <FileText className="h-4 w-4 mr-2" />
-                            Print/PDF
                           </Button>
                         </div>
                       </div>
