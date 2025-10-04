@@ -1,345 +1,299 @@
-import jsPDF from 'jspdf';
 import { Document, BillingItem, Client } from '../pages/Billing';
 import { formatNaira, formatNumber } from './currency';
 
-export const generatePDF = async (document: Document): Promise<void> => {
-  const pdf = new jsPDF();
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
+export const generateImage = async (document: Document): Promise<void> => {
+  // Create HTML content for the document
+  const htmlContent = generatePreviewHTML(document);
   
-  // Colors - matching the HTML design
-  const primaryBlue = [59, 130, 246]; // Blue-500
-  const secondaryGreen = [16, 185, 129]; // Green-500
-  const darkGray = [55, 65, 81]; // Gray-700
-  const lightGray = [243, 244, 246]; // Gray-100
-  const white = [255, 255, 255];
-  const veryLightGray = [248, 250, 252];
-  
-  // Create beautiful gradient header background
-  pdf.setFillColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-  pdf.rect(0, 0, pageWidth, 55, 'F');
-  
-  // Add gradient effect (simplified - blue to green)
-  pdf.setFillColor(secondaryGreen[0], secondaryGreen[1], secondaryGreen[2]);
-  pdf.rect(pageWidth * 0.6, 0, pageWidth * 0.4, 55, 'F');
-  
-  // Company Logo and Info
-  pdf.setFontSize(26);
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.setFont('helvetica', 'bold');
-  pdf.text('MOLL TECHNOLOGIES', 20, 20);
-  
-  pdf.setFontSize(14);
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.setFont('helvetica', 'normal');
-  pdf.text('RC: 7262696', 20, 28);
-  
-  pdf.setFontSize(10);
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text('Innovative Technology Solutions for Africa', 20, 35);
-  pdf.text('Email: mollelectechnigltd@gmail.com', 20, 40);
-  pdf.text('Phone: +234 702 555 4008', 20, 45);
-  pdf.text('Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT', 20, 50);
-  
-  // Document Type and Number (right side)
-  pdf.setFontSize(22);
-  pdf.setFont('helvetica', 'bold');
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text(document.type.toUpperCase(), pageWidth - 90, 20);
-  
-  pdf.setFontSize(11);
-  pdf.setFont('helvetica', 'normal');
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text(`#${document.id}`, pageWidth - 90, 28);
-  pdf.text(`Date: ${document.date}`, pageWidth - 90, 33);
-  if (document.dueDate) {
-    pdf.text(`Due: ${document.dueDate}`, pageWidth - 90, 38);
+  // Create a new window with the HTML content
+  const newWindow = window.open('', '_blank');
+  if (!newWindow) {
+    alert('Please allow popups to download the image');
+    return;
   }
   
-  // Client Information Section with background
-  const clientY = 70;
-  pdf.setFillColor(lightGray[0], lightGray[1], lightGray[2]);
-  pdf.rect(20, clientY - 8, pageWidth - 40, 40, 'F');
+  newWindow.document.write(htmlContent);
+  newWindow.document.close();
   
-  pdf.setFontSize(13);
-  pdf.setFont('helvetica', 'bold');
-  pdf.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-  pdf.text('BILL TO:', 25, clientY);
-  
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(11);
-  pdf.text(document.client.name, 25, clientY + 7);
-  if (document.client.company) {
-    pdf.text(document.client.company, 25, clientY + 13);
-  }
-  pdf.text(document.client.email, 25, clientY + 19);
-  pdf.text(document.client.phone, 25, clientY + 25);
-  if (document.client.address) {
-    pdf.text(document.client.address, 25, clientY + 31);
-  }
-  
-  // Items Table with better styling
-  const tableY = clientY + 45;
-  const tableWidth = pageWidth - 40;
-  const colWidths = [110, 25, 40]; // Description, Qty, Total
-  const rowHeight = 12;
-  
-  // Table Header with gradient
-  pdf.setFillColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-  pdf.rect(20, tableY, tableWidth, rowHeight, 'F');
-  
-  pdf.setFontSize(11);
-  pdf.setFont('helvetica', 'bold');
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text('Description', 25, tableY + 7);
-  pdf.text('Qty', 25 + colWidths[0] + 5, tableY + 7);
-  pdf.text('Total', 25 + colWidths[0] + colWidths[1] + 10, tableY + 7);
-  
-  // Table Rows with alternating colors
-  let currentY = tableY + rowHeight;
-  pdf.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-  pdf.setFont('helvetica', 'normal');
-  pdf.setFontSize(10);
-  
-  document.items.forEach((item, index) => {
-    // Alternate row colors
-    if (index % 2 === 0) {
-      pdf.setFillColor(veryLightGray[0], veryLightGray[1], veryLightGray[2]);
-      pdf.rect(20, currentY, tableWidth, rowHeight, 'F');
+  // Wait for content to load, then capture as image
+  setTimeout(async () => {
+    try {
+      // Use html2canvas to capture the document as image
+      const html2canvas = (await import('html2canvas')).default;
+      const element = newWindow.document.body;
+      
+      const canvas = await html2canvas(element, {
+        scale: 2, // Higher resolution
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: element.scrollWidth,
+        height: element.scrollHeight
+      });
+      
+      // Convert canvas to image and download
+      const link = newWindow.document.createElement('a');
+      link.download = `${document.type}-${document.id}.png`;
+      link.href = canvas.toDataURL('image/png');
+      newWindow.document.body.appendChild(link);
+      link.click();
+      newWindow.document.body.removeChild(link);
+      
+      // Close the temporary window
+      newWindow.close();
+    } catch (error) {
+      console.error('Error generating image:', error);
+      alert('Error generating image. Please try again.');
+      newWindow.close();
     }
-    
-    // Item description
-    pdf.text(item.name, 25, currentY + 7);
-    
-    // Quantity
-    pdf.text(item.quantity.toString(), 25 + colWidths[0] + 5, currentY + 7);
-    
-    // Total (calculated total amount)
-    pdf.text(formatNaira(item.total), 25 + colWidths[0] + colWidths[1] + 10, currentY + 7);
-    
-    currentY += rowHeight;
-  });
-  
-  // Totals Section with beautiful styling
-  const totalsY = currentY + 20;
-  const totalsX = pageWidth - 130;
-  
-  // Totals background
-  pdf.setFillColor(249, 250, 251);
-  pdf.rect(totalsX - 15, totalsY - 10, 125, 45, 'F');
-  
-  // Add border
-  pdf.setDrawColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-  pdf.setLineWidth(2);
-  pdf.rect(totalsX - 15, totalsY - 10, 125, 45);
-  
-  pdf.setFontSize(11);
-  pdf.setFont('helvetica', 'normal');
-  pdf.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-  
-  // Subtotal
-  pdf.text('Subtotal:', totalsX, totalsY);
-  pdf.text(formatNaira(document.subtotal), totalsX + 60, totalsY);
-  
-  // Tax
-  pdf.text('Tax:', totalsX, totalsY + 10);
-  pdf.text(formatNaira(document.tax), totalsX + 60, totalsY + 10);
-  
-  // Total with emphasis
-  pdf.setFont('helvetica', 'bold');
-  pdf.setFontSize(14);
-  pdf.setTextColor(primaryBlue[0], primaryBlue[1], primaryBlue[2]);
-  pdf.text('TOTAL:', totalsX, totalsY + 25);
-  pdf.text(formatNaira(document.total), totalsX + 60, totalsY + 25);
-  
-  // Notes Section with styling
-  if (document.notes) {
-    const notesY = totalsY + 50;
-    pdf.setFillColor(lightGray[0], lightGray[1], lightGray[2]);
-    pdf.rect(20, notesY - 8, pageWidth - 40, 30, 'F');
-    
-    pdf.setFontSize(11);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor(darkGray[0], darkGray[1], darkGray[2]);
-    pdf.text('Notes:', 25, notesY);
-    pdf.setFont('helvetica', 'normal');
-    
-    const maxWidth = pageWidth - 50;
-    const notesLines = pdf.splitTextToSize(document.notes, maxWidth);
-    pdf.text(notesLines, 25, notesY + 7);
+  }, 1000); // Wait 1 second for content to load
+};
+
+// Function to open print-friendly version for browser PDF save
+export const generatePrintView = (document: Document): void => {
+  const htmlContent = generatePreviewHTML(document);
+  const newWindow = window.open('', '_blank');
+  if (!newWindow) {
+    alert('Please allow popups to view the document');
+    return;
   }
   
-  // Footer with gradient
-  const footerY = pageHeight - 45;
-  pdf.setFillColor(darkGray[0], darkGray[1], darkGray[2]);
-  pdf.rect(0, footerY - 8, pageWidth, 45, 'F');
+  newWindow.document.write(htmlContent);
+  newWindow.document.close();
   
-  pdf.setFontSize(10);
-  pdf.setFont('helvetica', 'normal');
-  pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text('Thank you for your business!', 20, footerY);
-  pdf.text('For any questions, contact us at mollelectechnigltd@gmail.com', 20, footerY + 7);
-  pdf.text('Phone: +234 702 555 4008 | Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT', 20, footerY + 14);
-  
-  // Status badge with better styling
-  if (document.status !== 'draft') {
-    const statusColor = document.status === 'paid' ? 
-      [34, 197, 94] : document.status === 'sent' ? 
-      [59, 130, 246] : [156, 163, 175];
-    
-    pdf.setFillColor(statusColor[0], statusColor[1], statusColor[2]);
-    pdf.setTextColor(white[0], white[1], white[2]);
-    pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'bold');
-    const statusText = document.status.toUpperCase();
-    const statusWidth = pdf.getTextWidth(statusText) + 16;
-    pdf.roundedRect(pageWidth - statusWidth - 20, footerY - 20, statusWidth, 12, 6, 6, 'F');
-    pdf.text(statusText, pageWidth - statusWidth - 12, footerY - 12);
-  }
-  
-  // Save the PDF
-  const fileName = `${document.type}-${document.id}-${document.client.name.replace(/\s+/g, '-')}.pdf`;
-  pdf.save(fileName);
+  // Wait for content to load, then trigger print dialog
+  setTimeout(() => {
+    newWindow.focus();
+    newWindow.print();
+  }, 1000);
 };
 
 export const generatePreviewHTML = (document: Document): string => {
+  const companyName = "MOLL TECHNOLOGIES";
+  const companyRC = "RC: 7262696";
+  const companyTagline = "Innovative Technology Solutions for Africa";
+  const companyEmail = "mollelectechnigltd@gmail.com";
+  const companyPhone = "+234 702 555 4008";
+  const companyAddress = "2, Martin Oti Street, Guzape, Kwali, Abuja, FCT, Nigeria";
+
+  const clientAddressHtml = document.client.address ? `<div style="margin-top: 4px;">${document.client.address}</div>` : '';
+  const dueDateHtml = document.dueDate ? `<div style="margin-top: 4px;">Due: ${document.dueDate}</div>` : '';
+  const notesHtml = document.notes ? `
+    <div class="notes-section">
+      <div class="notes-title">Notes:</div>
+      <div class="notes-content">${document.notes}</div>
+    </div>
+  ` : '';
+
   return `
     <!DOCTYPE html>
     <html>
     <head>
-      <meta charset="utf-8">
-      <title>${document.type.toUpperCase()} #${document.id}</title>
+      <title>${document.type.toUpperCase()} - ${document.id}</title>
       <style>
-        body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin: 0;
-          padding: 20px;
-          background: #f8fafc;
-          color: #374151;
+        @media print {
+          body { 
+            margin: 0; 
+            padding: 0; 
+            background: white !important;
+          }
+          .document {
+            box-shadow: none !important;
+            margin: 0 !important;
+          }
         }
-        .document {
-          max-width: 800px;
-          margin: 0 auto;
-          background: white;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        body { 
+          font-family: 'Inter', sans-serif; 
+          margin: 0; 
+          padding: 0; 
+          background-color: #ffffff; 
+          color: #374151; 
+        }
+        .document { 
+          width: 210mm; 
+          min-height: 297mm; 
+          margin: 0 auto; 
+          background-color: #ffffff; 
+          box-shadow: 0 0 10px rgba(0,0,0,0.1); 
           overflow: hidden;
         }
-        .header {
-          background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
-          color: white;
-          padding: 30px;
-          text-align: center;
+        .header { 
+          background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e293b 100%);
+          color: white; 
+          padding: 30px; 
+          text-align: center; 
         }
-        .company-name {
-          font-size: 28px;
-          font-weight: bold;
-          margin-bottom: 8px;
+        .company-name { 
+          font-size: 28px; 
+          font-weight: bold; 
+          margin-bottom: 8px; 
         }
-        .company-tagline {
-          font-size: 14px;
-          opacity: 0.9;
+        .company-tagline { 
+          font-size: 14px; 
+          margin-top: 2px; 
+          font-weight: 600;
         }
-        .document-info {
+        .document-details { 
+          text-align: right; 
+        }
+        .document-type { 
+          font-size: 22px; 
+          font-weight: bold; 
+          margin-bottom: 5px; 
+        }
+        .document-id { 
+          font-size: 11px; 
+        }
+        .client-section { 
+          background-color: #f3f4f6; 
+          padding: 15px 20px; 
+          margin-top: 20px; 
+          border-radius: 8px; 
+        }
+        .client-title { 
+          font-size: 13px; 
+          font-weight: bold; 
+          color: #1f2937; 
+          margin-bottom: 5px; 
+        }
+        .client-details div { 
+          font-size: 11px; 
+          margin-top: 2px; 
+        }
+        .items-table { 
+          width: calc(100% - 40px); 
+          margin: 20px auto; 
+          border-collapse: collapse; 
+        }
+        .items-table th, .items-table td { 
+          padding: 10px; 
+          text-align: left; 
+          border-bottom: 1px solid #e5e7eb; 
+        }
+        .items-table th { 
+          background-color: #1e3a8a; 
+          color: #ffffff; 
+          font-size: 11px; 
+          font-weight: bold; 
+        }
+        .items-table tr:nth-child(even) { 
+          background-color: #f9fafb; 
+        }
+        .items-table td { 
+          font-size: 10px; 
+          color: #374151; 
+        }
+        .totals-section { 
+          width: calc(100% - 40px); 
+          margin: 20px auto; 
+          text-align: right; 
+        }
+        .totals-row { 
+          display: flex; 
+          justify-content: flex-end; 
+          margin-top: 5px; 
+        }
+        .totals-label { 
+          font-size: 11px; 
+          font-weight: normal; 
+          color: #4b5563; 
+          width: 80px; 
+        }
+        .totals-value { 
+          font-size: 11px; 
+          font-weight: normal; 
+          color: #374151; 
+          width: 80px; 
+          text-align: right; 
+        }
+        .total-row { 
+          border-top: 1px solid #e5e7eb; 
+          padding-top: 5px; 
+          margin-top: 10px; 
+        }
+        .total-label { 
+          font-size: 14px; 
+          font-weight: bold; 
+          color: #1e3a8a; 
+          width: 80px; 
+        }
+        .total-value { 
+          font-size: 14px; 
+          font-weight: bold; 
+          color: #1e3a8a; 
+          width: 80px; 
+          text-align: right; 
+        }
+        .notes-section { 
+          width: calc(100% - 40px); 
+          margin: 20px auto; 
+          padding: 15px; 
+          background-color: #f3f4f6; 
+          border-radius: 8px; 
+        }
+        .notes-title { 
+          font-size: 13px; 
+          font-weight: bold; 
+          color: #1f2937; 
+          margin-bottom: 5px; 
+        }
+        .notes-content { 
+          font-size: 11px; 
+          color: #374151; 
+          line-height: 1.5; 
+        }
+        .footer { 
+          background-color: #374151; 
+          color: #ffffff; 
+          padding: 20px; 
+          text-align: center; 
+          font-size: 10px; 
+          margin-top: 30px; 
+          position: relative; 
+        }
+        .footer a { 
+          color: #60a5fa; 
+          text-decoration: underline; 
+        }
+        .status-badge { 
+          position: absolute; 
+          top: 10px; 
+          right: 20px; 
+          padding: 5px 10px; 
+          border-radius: 5px; 
+          font-weight: bold; 
+          font-size: 8px; 
+          color: white; 
+        }
+        .status-paid { 
+          background-color: #22c55e; 
+        }
+        .status-sent { 
+          background-color: #1e3a8a; 
+        }
+        .status-draft { 
+          background-color: #ef4444; 
+        }
+        .logo-container {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          padding: 20px 30px;
-          background: #f3f4f6;
-          border-bottom: 1px solid #e5e7eb;
-        }
-        .document-type {
-          font-size: 24px;
-          font-weight: bold;
-          color: #3b82f6;
-        }
-        .document-details {
-          text-align: right;
-          font-size: 14px;
-        }
-        .client-info {
-          padding: 30px;
-          border-bottom: 1px solid #e5e7eb;
-        }
-        .client-title {
-          font-weight: bold;
+          justify-content: center;
           margin-bottom: 15px;
-          color: #374151;
         }
-        .items-table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-        .items-table th {
-          background: #3b82f6;
-          color: white;
-          padding: 12px;
-          text-align: left;
-          font-weight: bold;
-        }
-        .items-table td {
-          padding: 12px;
-          border-bottom: 1px solid #e5e7eb;
-        }
-        .items-table tr:nth-child(even) {
-          background: #f9fafb;
-        }
-        .totals {
-          padding: 30px;
-          background: #f9fafb;
-        }
-        .totals-row {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 8px;
-        }
-        .total-row {
-          font-weight: bold;
-          font-size: 18px;
-          border-top: 2px solid #3b82f6;
-          padding-top: 8px;
-          margin-top: 8px;
-        }
-        .notes {
-          padding: 30px;
-          border-top: 1px solid #e5e7eb;
-        }
-        .notes-title {
-          font-weight: bold;
-          margin-bottom: 10px;
-        }
-        .footer {
-          background: #374151;
-          color: white;
-          padding: 20px 30px;
-          text-align: center;
-          font-size: 14px;
-        }
-        .status-badge {
-          display: inline-block;
-          padding: 4px 12px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: bold;
-          text-transform: uppercase;
-        }
-        .status-${document.status} {
-          background: ${
-            document.status === 'paid' ? '#10b981' : 
-            document.status === 'sent' ? '#3b82f6' : 
-            '#6b7280'
-          };
-          color: white;
+        .logo-container img {
+          height: 60px;
+          width: auto;
+          margin-right: 15px;
         }
       </style>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     </head>
     <body>
       <div class="document">
         <div class="header">
-          <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                    <img src="/molllogo.png" alt="Moll Technologies Logo" style="height: 40px; margin-right: 15px;" onerror="this.style.display='none'">
+          <div class="logo-container">
+            <img src="/molllogo.png" alt="Moll Technologies Logo" onerror="this.style.display='none'">
             <div>
-              <div class="company-name">MOLL TECHNOLOGIES</div>
               <div class="company-tagline">RC: 7262696</div>
             </div>
           </div>
@@ -351,28 +305,29 @@ export const generatePreviewHTML = (document: Document): string => {
         
         <div class="document-info">
           <div class="document-type">${document.type.toUpperCase()}</div>
-          <div class="document-details">
-            <div>#${document.id}</div>
-            <div>Date: ${document.date}</div>
-            ${document.dueDate ? `<div>Due: ${document.dueDate}</div>` : ''}
+          <div class="document-id">#${document.id}</div>
+          <div style="margin-top: 8px;">Date: ${document.date}</div>
+          ${dueDateHtml}
+        </div>
+
+        <div class="client-section">
+          <div class="client-title">BILL TO:</div>
+          <div class="client-details">
+            <div>${document.client.name}</div>
+            ${document.client.company ? `<div>${document.client.company}</div>` : ''}
+            <div>${document.client.email}</div>
+            <div>${document.client.phone}</div>
+            ${clientAddressHtml}
           </div>
         </div>
-        
-        <div class="client-info">
-          <div class="client-title">BILL TO:</div>
-          <div>${document.client.name}</div>
-          ${document.client.company ? `<div>${document.client.company}</div>` : ''}
-          <div>${document.client.email}</div>
-          <div>${document.client.phone}</div>
-          ${document.client.address ? `<div>${document.client.address}</div>` : ''}
-        </div>
-        
+
         <table class="items-table">
           <thead>
             <tr>
-            <th>Description</th>
-            <th>Qty</th>
-            <th>Total</th>
+              <th>Description</th>
+              <th style="width: 60px;">Qty</th>
+              <th style="width: 80px; text-align: right;">Unit Price</th>
+              <th style="width: 80px; text-align: right;">Total</th>
             </tr>
           </thead>
           <tbody>
@@ -380,33 +335,29 @@ export const generatePreviewHTML = (document: Document): string => {
               <tr>
                 <td>${item.name}</td>
                 <td>${item.quantity}</td>
-                <td>${formatNaira(item.total)}</td>
+                <td style="text-align: right;">${formatNaira(item.unitPrice)}</td>
+                <td style="text-align: right;">${formatNaira(item.total)}</td>
               </tr>
             `).join('')}
           </tbody>
         </table>
-        
-        <div class="totals">
+
+        <div class="totals-section">
           <div class="totals-row">
-            <span>Subtotal:</span>
-            <span>${formatNaira(document.subtotal)}</span>
+            <div class="totals-label">Subtotal:</div>
+            <div class="totals-value">${formatNaira(document.subtotal)}</div>
           </div>
           <div class="totals-row">
-            <span>Tax:</span>
-            <span>${formatNaira(document.tax)}</span>
+            <div class="totals-label">Tax (${(document.tax / document.subtotal * 100).toFixed(0)}%):</div>
+            <div class="totals-value">${formatNaira(document.tax)}</div>
           </div>
           <div class="totals-row total-row">
-            <span>TOTAL:</span>
-            <span>${formatNaira(document.total)}</span>
+            <div class="total-label">TOTAL:</div>
+            <div class="total-value">${formatNaira(document.total)}</div>
           </div>
         </div>
-        
-        ${document.notes ? `
-          <div class="notes">
-            <div class="notes-title">Notes:</div>
-            <div>${document.notes}</div>
-          </div>
-        ` : ''}
+
+        ${notesHtml}
         
         <div class="footer">
           <div>Thank you for your business!</div>

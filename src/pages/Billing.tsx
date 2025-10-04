@@ -34,7 +34,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useNavigate } from 'react-router-dom';
-import { generatePDF, generatePreviewHTML } from '../utils/pdfGenerator';
+import { generateImage, generatePreviewHTML, generatePrintView } from '../utils/pdfGenerator';
 import { formatNaira, formatNumber } from '../utils/currency';
 
 // Types
@@ -388,12 +388,12 @@ const Billing = () => {
     setDueDate('');
   };
 
-  // Export to PDF
-  const exportToPDF = async (document: Document) => {
+  // Export to Image
+  const exportToImage = async (document: Document) => {
     try {
-      await generatePDF(document);
+      await generateImage(document);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      console.error('Error generating image:', error);
       // Fallback to text file
       const content = `
 QUOTATION/INVOICE #${document.id}
@@ -429,6 +429,11 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+  };
+
+  // Print/Save as PDF
+  const printDocument = (document: Document) => {
+    generatePrintView(document);
   };
 
   // Preview document
@@ -482,8 +487,8 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       {/* Header */}
       <div className="bg-black/50 backdrop-blur-sm border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
@@ -512,9 +517,9 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
         </div>
       </div>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3 bg-black/50">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 bg-black/50">
             <TabsTrigger value="create" className="data-[state=active]:bg-blue-600">
               <FileText className="h-4 w-4 mr-2" />
               Create Document
@@ -531,7 +536,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
 
           {/* Create Document Tab */}
           <TabsContent value="create" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
               {/* Left Column - Document Setup */}
               <div className="space-y-6">
                 {/* Document Type Selection */}
@@ -609,7 +614,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Input
                         placeholder="Client Name"
                         value={client.name}
@@ -624,7 +629,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                         className="bg-white/10 border-white/20 text-white placeholder-white/50"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <Input
                         placeholder="Phone"
                         value={client.phone}
@@ -838,7 +843,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                 ) : (
                   <div className="space-y-4">
                     {documents.map((doc) => (
-                      <div key={doc.id} className="flex items-center justify-between p-4 bg-white/5 rounded-lg">
+                      <div key={doc.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-white/5 rounded-lg gap-4">
                         <div className="flex items-center space-x-4">
                           <div className="p-2 bg-blue-600 rounded-lg">
                             {doc.type === 'quotation' ? (
@@ -856,7 +861,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex flex-wrap items-center gap-2">
                           <Badge 
                             variant={doc.status === 'paid' ? 'default' : doc.status === 'sent' ? 'secondary' : 'outline'}
                             className={doc.status === 'paid' ? 'bg-green-600' : doc.status === 'sent' ? 'bg-blue-600' : ''}
@@ -874,10 +879,18 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => exportToPDF(doc)}
+                            onClick={() => exportToImage(doc)}
                           >
                             <Download className="h-4 w-4 mr-2" />
-                            PDF
+                            Image
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => printDocument(doc)}
+                          >
+                            <FileText className="h-4 w-4 mr-2" />
+                            Print/PDF
                           </Button>
                         </div>
                       </div>
@@ -927,7 +940,7 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
             </div>
 
             {/* Inventory Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredItems.map((item) => (
                 <Card key={item.id} className="bg-black/50 border-white/10 hover:border-white/30 transition-colors">
                   <CardContent className="p-4">
