@@ -27,19 +27,19 @@ export const generatePDF = async (document: Document): Promise<void> => {
   pdf.setFontSize(26);
   pdf.setTextColor(white[0], white[1], white[2]);
   pdf.setFont('helvetica', 'bold');
-  pdf.text('TRACEROOT', 20, 20);
+  pdf.text('MOLL TECHNOLOGIES', 20, 20);
   
   pdf.setFontSize(14);
   pdf.setTextColor(white[0], white[1], white[2]);
   pdf.setFont('helvetica', 'normal');
-  pdf.text('TECHNOLOGY SOLUTIONS', 20, 28);
+  pdf.text('RC: 7262696', 20, 28);
   
   pdf.setFontSize(10);
   pdf.setTextColor(white[0], white[1], white[2]);
-  pdf.text('Professional Network Solutions', 20, 35);
-  pdf.text('Email: traceroot.io@gmail.com', 20, 40);
-  pdf.text('Phone: 09063412927', 20, 45);
-  pdf.text('Website: https://traceroot.com.ng', 20, 50);
+  pdf.text('Innovative Technology Solutions for Africa', 20, 35);
+  pdf.text('Email: mollelectechnigltd@gmail.com', 20, 40);
+  pdf.text('Phone: +234 702 555 4008', 20, 45);
+  pdf.text('Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT', 20, 50);
   
   // Document Type and Number (right side)
   pdf.setFontSize(22);
@@ -178,8 +178,8 @@ export const generatePDF = async (document: Document): Promise<void> => {
   pdf.setFont('helvetica', 'normal');
   pdf.setTextColor(white[0], white[1], white[2]);
   pdf.text('Thank you for your business!', 20, footerY);
-  pdf.text('For any questions, contact us at traceroot.io@gmail.com', 20, footerY + 7);
-  pdf.text('Visit us at https://traceroot.com.ng', 20, footerY + 14);
+  pdf.text('For any questions, contact us at mollelectechnigltd@gmail.com', 20, footerY + 7);
+  pdf.text('Phone: +234 702 555 4008 | Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT', 20, footerY + 14);
   
   // Status badge with better styling
   if (document.status !== 'draft') {
@@ -337,15 +337,15 @@ export const generatePreviewHTML = (document: Document): string => {
       <div class="document">
         <div class="header">
           <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="/logo.png" alt="TraceRoot Logo" style="height: 40px; margin-right: 15px;" onerror="this.style.display='none'">
+            <img src="/logo.png" alt="Moll Technologies Logo" style="height: 40px; margin-right: 15px;" onerror="this.style.display='none'">
             <div>
-              <div class="company-name">TRACEROOT</div>
-              <div class="company-tagline">TECHNOLOGY SOLUTIONS</div>
+              <div class="company-name">MOLL TECHNOLOGIES</div>
+              <div class="company-tagline">RC: 7262696</div>
             </div>
           </div>
           <div style="font-size: 12px;">
-            Professional Network Solutions • traceroot.io@gmail.com • 09063412927<br>
-            Website: <a href="https://traceroot.com.ng" style="color: white; text-decoration: underline;">https://traceroot.com.ng</a>
+            Innovative Technology Solutions for Africa • mollelectechnigltd@gmail.com • +234 702 555 4008<br>
+            Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT, Nigeria
           </div>
         </div>
         
@@ -411,8 +411,8 @@ export const generatePreviewHTML = (document: Document): string => {
         <div class="footer">
           <div>Thank you for your business!</div>
           <div style="margin-top: 8px;">
-            For any questions, contact us at traceroot.io@gmail.com<br>
-            Visit us at <a href="https://traceroot.com.ng" style="color: #60a5fa;">https://traceroot.com.ng</a>
+            For any questions, contact us at mollelectechnigltd@gmail.com<br>
+            Phone: +234 702 555 4008 | Address: 2, Martin Oti Street, Guzape, Kwali, Abuja, FCT, Nigeria
             <span class="status-badge status-${document.status}">${document.status}</span>
           </div>
         </div>

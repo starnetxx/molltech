@@ -4,12 +4,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import PackageBasic from "./pages/PackageBasic";
-import PackageStandard from "./pages/PackageStandard";
-import PackageAdvanced from "./pages/PackageAdvanced";
-import PackagePremium from "./pages/PackagePremium";
+import Gallery from "./pages/Gallery";
+import Videos from "./pages/Videos";
+import Login from "./pages/Login";
 import Billing from "./pages/Billing";
+import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -21,12 +21,17 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/package/basic" element={<PackageBasic />} />
-          <Route path="/package/standard" element={<PackageStandard />} />
-          <Route path="/package/advanced" element={<PackageAdvanced />} />
-          <Route path="/package/premium" element={<PackagePremium />} />
-          <Route path="/billing" element={<Billing />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/videos" element={<Videos />} />
+          <Route path="/login" element={<Login />} />
+          <Route 
+            path="/billing" 
+            element={
+              <ProtectedRoute>
+                <Billing />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

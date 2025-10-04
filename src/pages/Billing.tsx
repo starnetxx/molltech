@@ -22,7 +22,8 @@ import {
   ArrowLeft,
   Edit3,
   Save,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -167,6 +168,12 @@ const inventoryItems: BillingItem[] = [
 
 const Billing = () => {
   const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('userEmail');
+    navigate('/login');
+  };
   const [activeTab, setActiveTab] = useState('create');
   const [documentType, setDocumentType] = useState<'quotation' | 'invoice'>('quotation');
   const [naturalLanguageInput, setNaturalLanguageInput] = useState('');
@@ -488,14 +495,19 @@ ${document.notes ? `Notes: ${document.notes}` : ''}
                 Back to Home
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-white">Billing System</h1>
-                <p className="text-white/70">Generate quotations and invoices</p>
+                <h1 className="text-2xl font-bold text-white">Moll Technologies - Billing System</h1>
+                <p className="text-white/70">Generate quotations and invoices | RC: 7262696</p>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Building2 className="h-6 w-6 text-blue-400" />
-              <span className="text-white font-medium">TraceRoot Technologies</span>
-            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-white hover:bg-red-500/20 hover:text-red-300 border border-white/20"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
           </div>
         </div>
       </div>
