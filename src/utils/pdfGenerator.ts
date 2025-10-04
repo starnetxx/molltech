@@ -37,7 +37,9 @@ export const generateImage = async (document: Document): Promise<void> => {
         removeContainer: true, // Remove container elements
         imageTimeout: 3000, // 3 second timeout for images
         scrollX: 0,
-        scrollY: 0
+        scrollY: 0,
+        windowWidth: documentElement.scrollWidth,
+        windowHeight: documentElement.scrollHeight
       });
       
       // Convert canvas to image and download
@@ -124,7 +126,7 @@ export const generatePreviewHTML = (document: Document): string => {
         }
         .document { 
           width: 210mm; 
-          min-height: 297mm; 
+          min-height: auto; 
           margin: 20px auto; 
           background-color: #ffffff; 
           box-shadow: 0 0 10px rgba(0,0,0,0.1); 
@@ -266,7 +268,7 @@ export const generatePreviewHTML = (document: Document): string => {
           padding: 20px; 
           text-align: center; 
           font-size: 10px; 
-          margin-top: 30px; 
+          margin-top: 20px; 
           position: relative; 
         }
         .footer a { 
@@ -295,12 +297,12 @@ export const generatePreviewHTML = (document: Document): string => {
         .logo-container {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           margin-bottom: 15px;
           gap: 15px;
         }
         .logo-container img {
-          height: 40px;
+          height: 50px;
           width: auto;
           flex-shrink: 0;
         }
