@@ -15,9 +15,28 @@ export const generateImage = async (document: Document): Promise<void> => {
   newWindow.document.write(htmlContent);
   newWindow.document.close();
   
-  // Wait for content to load, then capture as image
+  // Wait for content and images to load, then capture as image
   setTimeout(async () => {
     try {
+      // Wait for all images to load completely
+      const images = newWindow.document.querySelectorAll('img');
+      const imagePromises = Array.from(images).map(img => {
+        return new Promise((resolve) => {
+          if (img.complete) {
+            resolve(true);
+          } else {
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(true); // Continue even if image fails to load
+          }
+        });
+      });
+      
+      // Wait for all images to load (or timeout)
+      await Promise.all(imagePromises);
+      
+      // Additional wait to ensure layout is stable
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       // Use html2canvas to capture only the document content
       const html2canvas = (await import('html2canvas')).default;
       const documentElement = newWindow.document.querySelector('.document') as HTMLElement;
@@ -34,10 +53,11 @@ export const generateImage = async (document: Document): Promise<void> => {
         width: documentElement.scrollWidth,
         height: documentElement.scrollHeight,
         logging: false, // Disable console logs
-        removeContainer: true, // Remove container elements
-        imageTimeout: 0, // No timeout for images
+        removeContainer: false, // Keep container elements for proper layout
+        imageTimeout: 5000, // 5 second timeout for images
         scrollX: 0,
-        scrollY: 0
+        scrollY: 0,
+        foreignObjectRendering: true // Better rendering for complex layouts
       });
       
       // Convert canvas to image and download
@@ -55,7 +75,7 @@ export const generateImage = async (document: Document): Promise<void> => {
       alert('Error generating image. Please try again.');
       newWindow.close();
     }
-  }, 2000); // Wait 2 seconds for content to load
+  }, 1000); // Initial wait for content to load
 };
 
 // Function to open print-friendly version for browser PDF save
@@ -317,7 +337,7 @@ export const generatePreviewHTML = (document: Document): string => {
       <div class="document">
         <div class="header">
           <div class="logo-container">
-            <img src="/molllogo.png" alt="Moll Technologies Logo" onerror="this.style.display='none'">
+            <img src="/molllogo.png" alt="Moll Technologies Logo" onerror="this.style.display='none'" style="max-width: 100%; height: auto;">
             <div class="company-tagline">RC: 7262696</div>
           </div>
           <div style="font-size: 12px;">
