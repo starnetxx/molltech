@@ -150,6 +150,10 @@ export const generatePreviewHTML = (document: Document): string => {
         .document-details { 
           text-align: right; 
         }
+        .document-info {
+          padding: 15px 20px;
+          margin-top: 20px;
+        }
         .document-type { 
           font-size: 22px; 
           font-weight: bold; 
