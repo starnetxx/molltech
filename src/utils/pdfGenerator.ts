@@ -18,17 +18,26 @@ export const generateImage = async (document: Document): Promise<void> => {
   // Wait for content to load, then capture as image
   setTimeout(async () => {
     try {
-      // Use html2canvas to capture the document as image
+      // Use html2canvas to capture only the document content
       const html2canvas = (await import('html2canvas')).default;
-      const element = newWindow.document.body;
+      const documentElement = newWindow.document.querySelector('.document') as HTMLElement;
       
-      const canvas = await html2canvas(element, {
+      if (!documentElement) {
+        throw new Error('Document element not found');
+      }
+      
+      const canvas = await html2canvas(documentElement, {
         scale: 2, // Higher resolution
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
-        width: element.scrollWidth,
-        height: element.scrollHeight
+        width: documentElement.scrollWidth,
+        height: documentElement.scrollHeight,
+        logging: false, // Disable console logs
+        removeContainer: true, // Remove container elements
+        imageTimeout: 0, // No timeout for images
+        scrollX: 0,
+        scrollY: 0
       });
       
       // Convert canvas to image and download
@@ -46,7 +55,7 @@ export const generateImage = async (document: Document): Promise<void> => {
       alert('Error generating image. Please try again.');
       newWindow.close();
     }
-  }, 1000); // Wait 1 second for content to load
+  }, 2000); // Wait 2 seconds for content to load
 };
 
 // Function to open print-friendly version for browser PDF save
@@ -108,14 +117,19 @@ export const generatePreviewHTML = (document: Document): string => {
           padding: 0; 
           background-color: #ffffff; 
           color: #374151; 
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          min-height: 100vh;
         }
         .document { 
           width: 210mm; 
           min-height: 297mm; 
-          margin: 0 auto; 
+          margin: 20px auto; 
           background-color: #ffffff; 
           box-shadow: 0 0 10px rgba(0,0,0,0.1); 
           overflow: hidden;
+          position: relative;
         }
         .header { 
           background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e293b 100%);
