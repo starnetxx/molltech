@@ -117,7 +117,7 @@ export const ProductTicker = () => {
             {duplicatedProducts.map((product, index) => (
               <div 
                 key={`${product.id}-${index}`}
-                className="flex-shrink-0 px-3 border-r border-gray-600 last:border-r-0"
+                className="flex-shrink-0 px-3 border-r border-slate-600 last:border-r-0"
               >
                 <div className="text-center">
                   {/* Product Name */}
@@ -135,14 +135,14 @@ export const ProductTicker = () => {
                     </span>
                     <div className="flex items-center">
                       {product.changeType === 'up' && (
-                        <TrendingUp className="h-2.5 w-2.5 text-green-400" />
+                        <TrendingUp className="h-2.5 w-2.5 text-sky-400" />
                       )}
                       {product.changeType === 'down' && (
                         <TrendingDown className="h-2.5 w-2.5 text-red-400" />
                       )}
                       {product.changeType === 'neutral' && (
                         <div className="w-2.5 h-2.5 flex items-center justify-center">
-                          <div className="w-1.5 h-0.5 bg-gray-400"></div>
+                          <div className="w-1.5 h-0.5 bg-slate-400"></div>
                         </div>
                       )}
                     </div>

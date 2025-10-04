@@ -38,6 +38,28 @@ const MollHeroSection = () => {
         "CCTV Systems",
         "Solar Power"
       ]
+    },
+    {
+      image: "https://images.pexels.com/photos/16560413/pexels-photo-16560413.png",
+      title: "CCTV",
+      subtitle: "Surveillance",
+      description: "Systems",
+      badge: "Security",
+      features: [
+        "24/7 Monitoring",
+        "Smart Security"
+      ]
+    },
+    {
+      image: "https://images.pexels.com/photos/4009621/pexels-photo-4009621.jpeg",
+      title: "Smart",
+      subtitle: "Home",
+      description: "Automation",
+      badge: "Innovation",
+      features: [
+        "Home Automation",
+        "Smart Devices"
+      ]
     }
   ];
 
@@ -125,20 +147,20 @@ const MollHeroSection = () => {
           {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-blue-500/20 text-blue-200 text-sm font-medium backdrop-blur-sm border border-blue-400/30">
+              <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-sky-500/20 text-sky-200 text-sm font-medium backdrop-blur-sm border border-sky-400/30">
                 <CheckCircle className="h-4 w-4" />
                 <span>{slides[currentSlide].badge}</span>
               </div>
               
               <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
                 <span className="block transition-all duration-1000">{slides[currentSlide].title}</span>
-                <span className="block bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent transition-all duration-1000">
+                <span className="block bg-gradient-to-r from-sky-400 to-blue-300 bg-clip-text text-transparent transition-all duration-1000">
                   {slides[currentSlide].subtitle}
                 </span>
-                <span className="block text-blue-100 transition-all duration-1000">{slides[currentSlide].description}</span>
+                <span className="block text-sky-100 transition-all duration-1000">{slides[currentSlide].description}</span>
               </h1>
               
-              <p className="text-lg text-blue-100 leading-relaxed max-w-xl">
+              <p className="text-lg text-sky-100 leading-relaxed max-w-xl">
                 Empowering businesses through innovative technology solutions.
               </p>
             </div>
@@ -147,7 +169,7 @@ const MollHeroSection = () => {
             <div className="space-y-2">
               {slides[currentSlide].features.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle className="h-4 w-4 text-blue-400 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-sky-400 flex-shrink-0" />
                   <span className="text-white font-medium text-sm">{feature}</span>
                 </div>
               ))}
@@ -157,7 +179,7 @@ const MollHeroSection = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6">
               <Button 
                 onClick={() => scrollToSection("#services")}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 group"
+                className="bg-gradient-to-r from-sky-600 to-blue-700 hover:from-sky-700 hover:to-blue-800 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-200 group"
               >
                 Explore Services
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
@@ -170,7 +192,7 @@ const MollHeroSection = () => {
               >
                 <Button 
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 group"
+                  className="border-2 border-white text-white hover:bg-white hover:text-slate-700 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-200 group"
                 >
                   <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-200" />
                   Our Profile
@@ -182,11 +204,11 @@ const MollHeroSection = () => {
             <div className="grid grid-cols-2 gap-4 pt-6">
               <div className="text-center p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
                 <div className="text-2xl font-bold text-white">500+</div>
-                <div className="text-xs text-blue-200 font-medium">Projects</div>
+                <div className="text-xs text-sky-200 font-medium">Projects</div>
               </div>
               <div className="text-center p-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
                 <div className="text-2xl font-bold text-white">50+</div>
-                <div className="text-xs text-blue-200 font-medium">Cities</div>
+                <div className="text-xs text-sky-200 font-medium">Cities</div>
               </div>
             </div>
           </div>
@@ -194,9 +216,9 @@ const MollHeroSection = () => {
           {/* Right Content - Visual */}
           <div className="relative">
             {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-400 rounded-full opacity-30 animate-pulse"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-green-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute top-1/2 -right-8 w-16 h-16 bg-purple-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-sky-400 rounded-full opacity-30 animate-pulse"></div>
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-1/2 -right-8 w-16 h-16 bg-slate-400 rounded-full opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
           </div>
         </div>
       </div>

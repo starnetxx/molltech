@@ -40,9 +40,9 @@ const WhatsAppButton = () => {
             isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2 pointer-events-none'
           }`}
         >
-          <div className="bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg whitespace-nowrap">
+          <div className="bg-slate-900 text-white px-4 py-2 rounded-lg shadow-lg whitespace-nowrap">
             <span className="text-sm font-medium">Chat with us on WhatsApp</span>
-            <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-gray-900"></div>
+            <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-slate-900"></div>
           </div>
         </div>
       </div>

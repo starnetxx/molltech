@@ -337,7 +337,7 @@ export const generatePreviewHTML = (document: Document): string => {
       <div class="document">
         <div class="header">
           <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <img src="/logo.png" alt="Moll Technologies Logo" style="height: 40px; margin-right: 15px;" onerror="this.style.display='none'">
+                    <img src="/molllogo.png" alt="Moll Technologies Logo" style="height: 40px; margin-right: 15px;" onerror="this.style.display='none'">
             <div>
               <div class="company-name">MOLL TECHNOLOGIES</div>
               <div class="company-tagline">RC: 7262696</div>

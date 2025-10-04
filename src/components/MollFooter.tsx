@@ -72,12 +72,16 @@ const MollFooter = () => {
           {/* Company Info */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-xl">M</span>
+              <div className="w-20 h-20 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                <img 
+                  src="/molllogo.png" 
+                  alt="Moll Technologies Logo" 
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white">Moll Technologies</h3>
-                <p className="text-sm text-blue-300 font-medium">RC: 7262696</p>
+                <p className="text-sm text-sky-300 font-medium">RC: 7262696</p>
               </div>
             </div>
             
