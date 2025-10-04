@@ -297,11 +297,18 @@ export const generatePreviewHTML = (document: Document): string => {
           align-items: center;
           justify-content: center;
           margin-bottom: 15px;
+          gap: 15px;
         }
         .logo-container img {
           height: 60px;
           width: auto;
-          margin-right: 15px;
+          flex-shrink: 0;
+        }
+        .logo-container .company-tagline {
+          font-size: 16px;
+          font-weight: 600;
+          color: white;
+          margin: 0;
         }
       </style>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -311,9 +318,7 @@ export const generatePreviewHTML = (document: Document): string => {
         <div class="header">
           <div class="logo-container">
             <img src="/molllogo.png" alt="Moll Technologies Logo" onerror="this.style.display='none'">
-            <div>
-              <div class="company-tagline">RC: 7262696</div>
-            </div>
+            <div class="company-tagline">RC: 7262696</div>
           </div>
           <div style="font-size: 12px;">
             Innovative Technology Solutions for Africa • mollelectechnigltd@gmail.com • +234 702 555 4008<br>
