@@ -157,25 +157,6 @@ const MollFooter = () => {
           </div>
         </div>
 
-        {/* Newsletter Signup */}
-        <div className="bg-gray-800 rounded-2xl p-6 mb-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-            <div>
-              <h4 className="text-xl font-bold text-white mb-2">Stay Updated</h4>
-              <p className="text-gray-300">Get the latest news and updates about our technology solutions.</p>
-            </div>
-            <div className="flex w-full lg:w-auto space-x-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 lg:w-64 px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Footer */}
