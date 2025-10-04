@@ -97,7 +97,7 @@ export const ProductTicker = () => {
   const duplicatedProducts = [...tickerProducts, ...tickerProducts];
 
   return (
-    <div className="bg-transparent text-white py-2 relative z-40 overflow-hidden" style={{ marginTop: '120px' }}>
+    <div className="bg-transparent text-white py-2 relative z-40 overflow-hidden" style={{ marginTop: '140px' }}>
       <div className="relative">
         {/* Label */}
         <div className="absolute left-0 top-0 bottom-0 flex items-center px-3 z-10">
